@@ -16,10 +16,7 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Build port
         run: |
-          SAVEROOT=`pwd`
-          # . ./tools/build_port.txt ports/soh/soh
-          pwd
-          cd $SAVEROOT
+          . ./tools/build_port.txt ports/soh/soh
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
