@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ARCH=aarch64
+RELEASE=focal
+NAME=$1
+
+docker pull --platform linux/${ARCH} ubuntu:${RELEASE}
+docker build --platform linux/${ARCH} -t ${NAME} .
+docker run -v `realpath ..`:/root --name=${NAME} ${NAME} /bin/bash -c "sleep infinity" &

@@ -1,0 +1,42 @@
+name: Build Ship of Harkinian 2 nightly
+on:
+  # Build on request
+  workflow_dispatch
+#  schedule:
+#    - cron:  '5 4 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools
+            ports/soh2-nightly
+          sparse-checkout-cone-mode: false
+      - name: Build port
+        run: |
+          . ./tools/build_port.txt ports/soh2-nightly/soh2-nightly
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Create git tag and upload
+        run: |
+          git config --global user.email "ben@willmore.eu"
+          git config --global user.name "Github Action"
+          git pull origin
+          git add ports/soh2-nightly
+          git commit -m "SoH2 nightly build ${{ steps.date.outputs.date }}"
+          git tag SoH2-nightly-${{ steps.date.outputs.date }}
+          git push origin tag SoH2-nightly-${{ steps.date.outputs.date }}
+          git push origin
+      - name: Publish packaged artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: SoH2-Portmaster-nightly
+          path: |
+            ports/soh2-nightly/Ship of Harkinian 2 nightly.sh
+            ports/soh2-nightly/soh2-nightly
+          retention-days: 7
+          overwrite: true
+          include-hidden-files: true

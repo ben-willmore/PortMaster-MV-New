@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SRCDIR=$1
+DESTDIR=$2
+
+cp $SRCDIR/2ship2harkinian/build-soh/mm/2s2h.elf $DESTDIR/
+cp $SRCDIR/2ship2harkinian/build-soh/mm/2ship.o2r $DESTDIR/
+
+rm -r $DESTDIR/libs
+cp -r $SRCDIR/2ship2harkinian/build-soh/libs $DESTDIR/
+
+cp $SRCDIR/2ship2harkinian/build-soh/ZAPD/ZAPD.out $DESTDIR/assets/extractor/ZAPD.out
