@@ -1,0 +1,42 @@
+name: Build Starship nightly
+on:
+  # Build on request
+  workflow_dispatch
+#  schedule:
+#    - cron:  '5 4 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools
+            ports/starship-nightly
+          sparse-checkout-cone-mode: false
+      - name: Build port
+        run: |
+          . ./tools/build_port.txt ports/starship-nightly/starship-nightly
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Create git tag and upload
+        run: |
+          git config --global user.email "ben@willmore.eu"
+          git config --global user.name "Github Action"
+          git pull origin
+          git add ports/starship-nightly
+          git commit -m "Starship nightly build ${{ steps.date.outputs.date }}"
+          git tag Starship-nightly-${{ steps.date.outputs.date }}
+          git push origin tag Starship-nightly-${{ steps.date.outputs.date }}
+          git push origin
+      - name: Publish packaged artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Starship-Portmaster-nightly
+          path: |
+            ports/starship/Starship nightly.sh
+            ports/starship/starship-nightly
+          retention-days: 7
+          overwrite: true
+          include-hidden-files: true
