@@ -1,0 +1,18 @@
+#/bin/bash
+
+ROOTDIR=`pwd`
+RELDIR=$1
+PORTDIR=$ROOTDIR/$RELDIR
+PORTNAME=`basename $PORTDIR`
+SRCDIR=$PORTDIR/src
+SETUPSCRIPT=$SRCDIR/docker-setup.txt
+DOCKERFILE=$SRCDIR/Dockerfile
+BUILDSCRIPT=build.txt
+
+mkdir build-port
+cd build-port
+cp $DOCKERFILE .
+. $SETUPSCRIPT $PORTNAME-build
+
+sleep 5
+docker exec $PORTNAME-build /bin/bash -c "cd build-port && . /root/$RELDIR/build.txt"

@@ -2,13 +2,8 @@
 
 ARCH=aarch64
 RELEASE=focal
-NAME=soh-build
+NAME=$1
 
 docker pull --platform linux/${ARCH} ubuntu:${RELEASE}
-docker build --no-cache --platform linux/${ARCH} -t ${NAME} .
-docker run \
- -v .:/root \
- --platform=linux/${ARCH} \
- --name=${container_name} \
- --hostname=${container_name} \
- ${image_name}
+docker build --platform linux/${ARCH} -t ${NAME} .
+docker run -v `realpath ..`:/root --name=${NAME} ${NAME} /bin/bash -c "sleep infinity" &
