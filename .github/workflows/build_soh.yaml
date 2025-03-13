@@ -4,6 +4,13 @@ on:
   workflow_dispatch
 #  schedule:
 #    - cron:  '5 4 * * *'
+
+env: PORT_NAME: "Ship of Harkinian"
+env: SHORT_NAME: "SoH"
+env: PORT_DIR: soh
+env: BUILD_TYPE: release
+env: EMAIL: ben@willmore.eu
+
 jobs:
   build:
     runs-on: ubuntu-24.04-arm
@@ -12,31 +19,31 @@ jobs:
         with:
           sparse-checkout: |
             tools
-            ports/soh
+            ports/$PORT_DIR
           sparse-checkout-cone-mode: false
       - name: Build port
         run: |
-          . ./tools/build_port.txt ports/soh/soh
+          . ./tools/build_port.txt ports/$PORT_DIR/$PORT_DIR
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Create git tag and upload
         run: |
-          git config --global user.email "ben@willmore.eu"
+          git config --global user.email "$EMAIL"
           git config --global user.name "Github Action"
           git pull origin
-          git add ports/soh
-          git commit -m "SoH release build ${{ steps.date.outputs.date }}"
-          git tag SoH-release-${{ steps.date.outputs.date }}
-          git push origin tag SoH-release-${{ steps.date.outputs.date }}
+          git add ports/$PORT_DIR
+          git commit -m "$SHORT_NAME $BUILD_TYPE build ${{ steps.date.outputs.date }}"
+          git tag $SHORT_NAME-$BUILD_TYPE-${{ steps.date.outputs.date }}
+          git push origin tag $SHORT_NAME-$BUILD_TYPE-${{ steps.date.outputs.date }}
           git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: SoH-Portmaster
+          name: $SHORT_NAME-Portmaster
           path: |
-            ports/soh/Ship of Harkinian.sh
-            ports/soh/soh
+            ports/$PORT_DIR/*.sh
+            ports/$PORT_DIR/$PORT_DIR
           retention-days: 7
           overwrite: true
           include-hidden-files: true
