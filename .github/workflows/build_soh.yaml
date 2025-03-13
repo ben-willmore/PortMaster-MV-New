@@ -24,7 +24,9 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Build port
         run: |
-          . ./tools/build_port.txt ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
+          pwd
+          echo test > ports/${{ env.PORT_DIR }}/test.txt
+#          . ./tools/build_port.txt ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
