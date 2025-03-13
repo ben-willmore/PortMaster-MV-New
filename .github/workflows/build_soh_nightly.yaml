@@ -28,6 +28,7 @@ jobs:
           git add ports/soh-nightly
           git commit -m "SoH nightly build ${{ steps.date.outputs.date }}"
           git tag SoH-nightly-${{ steps.date.outputs.date }}
+          git push origin tag SoH-nightly-${{ steps.date.outputs.date }}
           git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4

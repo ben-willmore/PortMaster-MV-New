@@ -28,6 +28,7 @@ jobs:
           git add ports/soh2
           git commit -m "SoH2 release build ${{ steps.date.outputs.date }}"
           git tag SoH2-release-${{ steps.date.outputs.date }}
+          git push origin tag SoH2-release-${{ steps.date.outputs.date }}
           git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4

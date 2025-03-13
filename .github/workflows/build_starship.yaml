@@ -28,6 +28,7 @@ jobs:
           git add ports/starship
           git commit -m "Starship release build ${{ steps.date.outputs.date }}"
           git tag Starship-release-${{ steps.date.outputs.date }}
+          git push origin tag Starship-release-${{ steps.date.outputs.date }}
           git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
