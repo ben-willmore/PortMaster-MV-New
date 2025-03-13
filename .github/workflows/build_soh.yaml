@@ -22,8 +22,8 @@ jobs:
         with:
           name: SoH-Portmaster
           path: |
-            "ports/soh/Ship Of Harkinian.sh"
-            "ports/soh/soh"
+            "/ports/soh/*.sh"
+            "/ports/soh/soh"
           retention-days: 7
           overwrite: true
           include-hidden-files: true
