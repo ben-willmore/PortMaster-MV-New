@@ -84,8 +84,8 @@ CC=clang-18 CXX=clang++-18 cmake .. -GNinja -DUSE_OPENGLES=1 \
  -DBUILD_CROWD_CONTROL=0 -DCMAKE_BUILD_TYPE=Release \
  -DCMAKE_CXX_FLAGS=-ldl
 
-cmake --build . --config Release --target GeneratePortOTR
-cmake --build .
+cmake --build . -j8 --config Release --target GeneratePortOTR
+cmake --build . -j8
 
 # Collate libs
 mkdir libs

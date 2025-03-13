@@ -4,7 +4,7 @@ SRCDIR=$1
 DESTDIR=$2
 
 cp $SRCDIR/starship/build-starship/Starship $DESTDIR/
-cp $SRCDIR/starship/build-starship/starship.o2r $DESTDIR/
+cp $SRCDIR/starship/build-starship/starship.otr $DESTDIR/
 
 rm -r $DESTDIR/libs
 cp $SRCDIR/starship/build-starship/libs $DESTDIR/
