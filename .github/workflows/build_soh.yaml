@@ -20,31 +20,31 @@ jobs:
         with:
           sparse-checkout: |
             tools
-            ports/$PORT_DIR
+            ports/${{ env.PORT_DIR }}
           sparse-checkout-cone-mode: false
       - name: Build port
         run: |
-          . ./tools/build_port.txt ports/$PORT_DIR/$PORT_DIR
+          . ./tools/build_port.txt ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Create git tag and upload
         run: |
-          git config --global user.email "$EMAIL"
+          git config --global user.email "${{ env.EMAIL }}"
           git config --global user.name "Github Action"
           git pull origin
-          git add ports/$PORT_DIR
+          git add ports/${{ env.PORT_DIR }}
           git commit -m "$SHORT_NAME $BUILD_TYPE build ${{ steps.date.outputs.date }}"
-          git tag $SHORT_NAME-$BUILD_TYPE-${{ steps.date.outputs.date }}
-          git push origin tag $SHORT_NAME-$BUILD_TYPE-${{ steps.date.outputs.date }}
+          git tag ${{ env.SHORT_NAME }}-${{ BUILD_TYPE }}-${{ steps.date.outputs.date }}
+          git push origin tag ${{ env.SHORT_NAME }}-${{ BUILD_TYPE }}-${{ steps.date.outputs.date }}
           git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
           name: $SHORT_NAME-Portmaster
           path: |
-            ports/$PORT_DIR/*.sh
-            ports/$PORT_DIR/$PORT_DIR
+            ports/${{ env.PORT_DIR }}/*.sh
+            ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
           retention-days: 7
           overwrite: true
           include-hidden-files: true
