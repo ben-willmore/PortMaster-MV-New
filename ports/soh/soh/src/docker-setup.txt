@@ -6,4 +6,9 @@ NAME=soh-build
 
 docker pull --platform linux/${ARCH} ubuntu:${RELEASE}
 docker build --no-cache --platform linux/${ARCH} -t ${NAME} .
-docker run -it --platform=linux/${ARCH} --name=${NAME} ${NAME}
+docker run \
+ -v .:/root \
+ --platform=linux/${ARCH} \
+ --name=${container_name} \
+ --hostname=${container_name} \
+ ${image_name}
