@@ -1,4 +1,4 @@
-name: Build Ship of Harkinian 2 (S2H2)
+name: Build Ship of Harkinian 2
 on:
   # Build on request
   workflow_dispatch
@@ -17,13 +17,24 @@ jobs:
       - name: Build port
         run: |
           . ./tools/build_port.txt ports/soh2/soh2
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Create git tag and upload
+        run: |
+          git config --global user.email "ben@willmore.eu"
+          git config --global user.name "Github Action"
+          git add ports/soh2
+          git commit -m "SoH2 nightly build ${{ steps.date.outputs.date }}"
+          git tag SoH2-nightly-${{ steps.date.outputs.date }}
+          git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
           name: SoH2-Portmaster
           path: |
-            "/ports/soh2/*.sh"
-            "/ports/soh2/soh2"
+            ports/soh2/Ship of Harkinian 2.sh
+            ports/soh2/soh2
           retention-days: 7
           overwrite: true
           include-hidden-files: true
