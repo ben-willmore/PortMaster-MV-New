@@ -20,6 +20,10 @@ jobs:
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: soh.zip
-          path: /ports/soh/
+          name: SoH-Portmaster
+          path: |
+            "ports/soh/Ship Of Harkinian.sh"
+            "ports/soh/soh"
           retention-days: 7
+          overwrite: true
+          include-hidden-files: true
