@@ -31,14 +31,16 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Create git tag and upload
         run: |
-          git config --global user.email "${{ env.EMAIL }}"
-          git config --global user.name "Github Action"
-          git pull origin
-          git add ports/${{ env.PORT_DIR }}
-          git commit -m "${{ env.SHORT_NAME }} ${{ env.BUILD_TYPE }} build ${{ steps.date.outputs.date }}"
-          # git tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
-          git push origin
-          # git push --delete origin :refs/tags/${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
+          pwd
+          # git config --global user.email "${{ env.EMAIL }}"
+          # git config --global user.name "Github Action"
+          # git pull origin
+          # git add ports/${{ env.PORT_DIR }}
+          # git commit -m "${{ env.SHORT_NAME }} ${{ env.BUILD_TYPE }} build ${{ steps.date.outputs.date }}"
+          # # git tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
+          # git push origin
+          # # git push --delete origin :refs/tags/${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
+
       # - name: Publish packaged artifacts
       #   uses: actions/upload-artifact@v4
       #   with:
@@ -49,6 +51,7 @@ jobs:
       #     retention-days: 7
       #     overwrite: true
       #     include-hidden-files: true
+
       - name: Create zip file
         run: |
           cd ports/${{ env.PORT_DIR }}
