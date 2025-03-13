@@ -25,8 +25,8 @@ jobs:
           git config --global user.email "ben@willmore.eu"
           git config --global user.name "Github Action"
           git add ports/soh2
-          git commit -m "SoH2 nightly build ${{ steps.date.outputs.date }}"
-          git tag SoH2-nightly-${{ steps.date.outputs.date }}
+          git commit -m "SoH2 release build ${{ steps.date.outputs.date }}"
+          git tag SoH2-release-${{ steps.date.outputs.date }}
           git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
