@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SRCDIR=$1
+DESTDIR=$2
+
 cp $SRCDIR/starship/build-starship/Starship $DESTDIR/
 cp $SRCDIR/starship/build-starship/starship.o2r $DESTDIR/
 
