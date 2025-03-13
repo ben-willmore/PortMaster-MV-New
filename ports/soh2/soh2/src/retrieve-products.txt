@@ -7,6 +7,6 @@ cp $SRCDIR/2ship2harkinian/build-soh/mm/2s2h.elf $DESTDIR/
 cp $SRCDIR/2ship2harkinian/build-soh/mm/2ship.o2r $DESTDIR/
 
 rm -r $DESTDIR/libs
-cp $SRCDIR/2ship2harkinian/build-soh/libs $DESTDIR/
+cp -r $SRCDIR/2ship2harkinian/build-soh/libs $DESTDIR/
 
 cp $SRCDIR/2ship2harkinian/build-soh/ZAPD/ZAPD.out ./assets/extractor/ZAPD.out
