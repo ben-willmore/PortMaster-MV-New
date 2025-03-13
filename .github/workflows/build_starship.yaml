@@ -1,0 +1,41 @@
+name: Build Starship
+on:
+  # Build on request
+  workflow_dispatch
+#  schedule:
+#    - cron:  '5 4 * * *'
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            tools
+            ports/starship
+          sparse-checkout-cone-mode: false
+      - name: Build port
+        run: |
+          . ./tools/build_port.txt ports/starship/starship
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Create git tag and upload
+        run: |
+          git config --global user.email "ben@willmore.eu"
+          git config --global user.name "Github Action"
+          git pull origin
+          git add ports/starship
+          git commit -m "Starship release build ${{ steps.date.outputs.date }}"
+          git tag Starship-release-${{ steps.date.outputs.date }}
+          git push origin
+      - name: Publish packaged artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Starship-Portmaster
+          path: |
+            ports/starship/Starship.sh
+            ports/starship/starship
+          retention-days: 7
+          overwrite: true
+          include-hidden-files: true

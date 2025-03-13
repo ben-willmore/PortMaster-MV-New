@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cp $SRCDIR/starship/build-starship/Starship $DESTDIR/
+cp $SRCDIR/starship/build-starship/starship.o2r $DESTDIR/
+
+rm -r $DESTDIR/libs
+cp $SRCDIR/starship/build-starship/libs $DESTDIR/
