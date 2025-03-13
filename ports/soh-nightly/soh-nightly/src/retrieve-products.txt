@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SRCDIR=$1
+DESTDIR=$2
+
+cp $SRCDIR/Shipwright/build-soh/soh/soh.elf $DESTDIR/
+cp $SRCDIR/Shipwright/build-soh/soh/soh.otr $DESTDIR/
+
+rm -r $DESTDIR/libs
+cp -r $SRCDIR/Shipwright/build-soh/libs $DESTDIR/
+
+cp $SRCDIR/Shipwright/build-soh/ZAPD/ZAPD.out $DESTDIR/assets/ZAPD.out

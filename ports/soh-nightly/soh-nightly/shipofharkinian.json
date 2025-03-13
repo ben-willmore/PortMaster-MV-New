@@ -1,0 +1,36 @@
+{
+    "CVars": {
+        "gEnhancements": {
+            "AltAssets": 1
+        },
+        "gGeneral": {
+            "SelectedPresets": [
+                2
+            ]
+        },
+        "gOpenWindows": {
+            "ModalWindow": 1
+        },
+        "gSettings": {
+            "ControlNav": 1,
+            "OpenMenuBar": 0,
+            "OverlayFont": "Press Start 2P",
+            "ZFightingMode": 0
+        }
+    },
+    "ConfigVersion": 2,
+    "Window": {
+        "AudioBackend": "sdl",
+        "Backend": {
+            "Id": 3,
+            "Name": "OpenGL"
+        },
+        "Fullscreen": {
+            "Enabled": false
+        },
+        "Height": 480,
+        "PositionX": 957,
+        "PositionY": 340,
+        "Width": 640
+    }
+}
