@@ -34,9 +34,9 @@ jobs:
           git config --global user.name "Github Action"
           git pull origin
           git add ports/${{ env.PORT_DIR }}
-          git commit -m "$SHORT_NAME $BUILD_TYPE build ${{ steps.date.outputs.date }}"
-          git tag ${{ env.SHORT_NAME }}-${{ BUILD_TYPE }}-${{ steps.date.outputs.date }}
-          git push origin tag ${{ env.SHORT_NAME }}-${{ BUILD_TYPE }}-${{ steps.date.outputs.date }}
+          git commit -m "${{ env.SHORT_NAME }} ${{ env.BUILD_TYPE }} build ${{ steps.date.outputs.date }}"
+          git tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
+          git push origin tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
           git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
