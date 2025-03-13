@@ -47,8 +47,13 @@ cd ..
 #### SoH ####
 git clone https://github.com/HarbourMasters/Shipwright.git
 cd Shipwright
-# build the develop branch (OpenGLES not available on 8.0.6 release)
-git checkout develop
+
+# build the develop branch 
+# git checkout develop
+
+# OpenGLES is not available on 8.0.6 release, so we use this commit
+git checkout 651348d2a94f6bfa5f7e7f89800908e9e8a4a3e5
+
 git submodule update --init
 mkdir build-soh && cd build-soh
 CC=clang-18 CXX=clang++-18 cmake .. -GNinja -DUSE_OPENGLES=1 \
