@@ -1,18 +1,27 @@
 #/bin/bash
 
-ROOTDIR=`pwd`
-RELDIR=$1
-PORTDIR=$ROOTDIR/$RELDIR
+HOSTROOT=`pwd`
+DOCKERROOT=/root
+
+PORTDIR=$1
 PORTNAME=`basename $PORTDIR`
 SRCDIR=$PORTDIR/src
 SETUPSCRIPT=$SRCDIR/docker-setup.txt
 DOCKERFILE=$SRCDIR/Dockerfile
-BUILDSCRIPT=build.txt
+PRODUCTSCRIPT=$SRCDIR/retrieve-products.txt
+BUILDSCRIPT=$SRCDIR/build.txt
 
-mkdir build-port
-cd build-port
-cp $DOCKERFILE .
-. $SETUPSCRIPT $PORTNAME-build
+BUILDDIR=build-port
+
+mkdir $HOSTROOT/$BUILDDIR
+cd $HOSTROOT/$BUILDDIR
+cp $HOSTROOT/$DOCKERFILE .
+. $HOSTROOT/$SETUPSCRIPT $PORTNAME-build
 
 sleep 5
-docker exec $PORTNAME-build /bin/bash -c "cd build-port && . /root/$RELDIR/build.txt"
+docker exec $PORTNAME-build /bin/bash -c "cd $BUILDDIR && . $DOCKERROOT/$BUILDSCRIPT"
+
+. $HOSTROOT/$PRODUCTSCRIPT $HOSTROOT/$BUILDDIR $HOSTROOT/$PORTDIR
+
+cd $HOSTROOT/$PORTDIR/..
+zip -r $PORTNAME.zip *.sh $PORTNAME
