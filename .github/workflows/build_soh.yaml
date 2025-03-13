@@ -9,13 +9,31 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v4
-      with:
-        sparse-checkout: |
-          ports/soh
-        sparse-checkout-cone-mode: false
-
+        with:
+          sparse-checkout: |
+            ports/soh
+          sparse-checkout-cone-mode: false
+      - name: Checkout SoH
         run: |
           ls
+# jobs:
+#   build:
+#     runs-on: ubuntu-24.04-arm
+#     steps:
+#       - uses: actions/checkout@v4
+#       with:
+#         sparse-checkout: |
+#           ports/soh
+#         sparse-checkout-cone-mode: false
+
+#         run: |
+#           ls
+
+#           - uses: actions/checkout@v4
+#   with:
+#     sparse-checkout: |
+#       README.md
+#     sparse-checkout-cone-mode: false
 
     #   - name: Create docker container
     #     run: |
