@@ -36,8 +36,7 @@ jobs:
           git add ports/${{ env.PORT_DIR }}
           git commit -m "${{ env.SHORT_NAME }} ${{ env.BUILD_TYPE }} build ${{ steps.date.outputs.date }}"
           git tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
-          git push origin tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
-          git push origin
+          git push -f origin tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
