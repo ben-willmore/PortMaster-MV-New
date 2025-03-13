@@ -6,8 +6,8 @@ on:
 #    - cron:  '5 4 * * *'
 
 env:
-  PORT_NAME: "Starship nightly"
-  SHORT_NAME: "Starship-nightly"
+  PORT_NAME: "Starship"
+  SHORT_NAME: "Starship"
   PORT_DIR: starship-nightly
   BUILD_TYPE: nightly
   EMAIL: ben@willmore.eu

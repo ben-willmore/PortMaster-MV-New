@@ -6,8 +6,8 @@ on:
 #    - cron:  '5 4 * * *'
 
 env:
-  PORT_NAME: "Ship of Harkinian nightly"
-  SHORT_NAME: "SoH-nightly"
+  PORT_NAME: "Ship of Harkinian"
+  SHORT_NAME: "SoH"
   PORT_DIR: soh-nightly
   BUILD_TYPE: nightly
   EMAIL: ben@willmore.eu
