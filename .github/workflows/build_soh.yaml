@@ -24,6 +24,7 @@ jobs:
         run: |
           git config --global user.email "ben@willmore.eu"
           git config --global user.name "Github Action"
+          git pull origin
           git add ports/soh
           git commit -m "SoH nightly build ${{ steps.date.outputs.date }}"
           git tag SoH-nightly-${{ steps.date.outputs.date }}
