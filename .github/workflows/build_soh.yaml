@@ -24,22 +24,20 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Build port
         run: |
-          pwd
-#          . ./tools/build_port.txt ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
+          . ./tools/build_port.txt ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
       - name: Create git tag and upload
         run: |
-          pwd
-          # git config --global user.email "${{ env.EMAIL }}"
-          # git config --global user.name "Github Action"
-          # git pull origin
-          # git add ports/${{ env.PORT_DIR }}
-          # git commit -m "${{ env.SHORT_NAME }} ${{ env.BUILD_TYPE }} build ${{ steps.date.outputs.date }}"
-          # # git tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
-          # git push origin
-          # # git push --delete origin :refs/tags/${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
+          git config --global user.email "${{ env.EMAIL }}"
+          git config --global user.name "Github Action"
+          git pull origin
+          git add ports/${{ env.PORT_DIR }}
+          git commit -m "${{ env.SHORT_NAME }} ${{ env.BUILD_TYPE }} build ${{ steps.date.outputs.date }}"
+          # git tag ${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
+          git push origin
+          # git push --delete origin :refs/tags/${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}
 
       # - name: Publish packaged artifacts
       #   uses: actions/upload-artifact@v4
@@ -60,7 +58,7 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
+          automatic_release_tag: "${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-latest"
           prerelease: true
           title: "${{ env.SHORT_NAME }}-Portmaster-${{ steps.date.outputs.date }}"
           files: |
