@@ -25,7 +25,8 @@ jobs:
         run: |
           git config --global user.email "ben@willmore.eu"
           git config --global user.name "Github Action"
-          git commit ports/soh -m "SoH nightly build ${{ steps.date.outputs.date }}"
+          git add ports/soh
+          git commit -m "SoH nightly build ${{ steps.date.outputs.date }}"
           git tag SoH-nightly-${{ steps.date.outputs.date }}
           git push origin
       - name: Publish packaged artifacts
