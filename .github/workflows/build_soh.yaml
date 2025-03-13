@@ -40,7 +40,7 @@ jobs:
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: $SHORT_NAME-Portmaster
+          name: ${{ env.SHORT_NAME }}-Portmaster
           path: |
             ports/${{ env.PORT_DIR }}/*.sh
             ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
