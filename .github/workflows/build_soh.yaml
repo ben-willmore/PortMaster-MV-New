@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: |
+            tools
             ports/soh
           sparse-checkout-cone-mode: false
       - name: Build port
