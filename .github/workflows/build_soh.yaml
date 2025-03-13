@@ -16,7 +16,16 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Build port
         run: |
-          . ./tools/build_port.txt ports/soh/soh
+          # . ./tools/build_port.txt ports/soh/soh
+          echo test > ports/soh/soh/test.txt
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Create git tag and upload
+        run: |
+          git commit ports/soh -m "SoH nightly build ${{ steps.date.outputs.date }}"
+          git tag SoH-nightly-${{ steps.date.outputs.date }}
+          git push origin
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
