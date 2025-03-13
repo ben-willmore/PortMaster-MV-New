@@ -13,27 +13,17 @@ jobs:
           sparse-checkout: |
             ports/soh
           sparse-checkout-cone-mode: false
-      - name: Checkout SoH
+      - name: Create docker container
         run: |
-          ls
-# jobs:
-#   build:
-#     runs-on: ubuntu-24.04-arm
-#     steps:
-#       - uses: actions/checkout@v4
-#       with:
-#         sparse-checkout: |
-#           ports/soh
-#         sparse-checkout-cone-mode: false
-
-#         run: |
-#           ls
-
-#           - uses: actions/checkout@v4
-#   with:
-#     sparse-checkout: |
-#       README.md
-#     sparse-checkout-cone-mode: false
+          ROOTDIR=`pwd`
+          PORTDIR=$ROOTDIR/ports/soh/soh
+          SRCDIR=$PORTDIR/src
+          SETUPSCRIPT=$SRCDIR/docker-setup.txt
+          BUILDSCRIPT=$SRCDIR/build.txt
+  
+          mkdir build-soh
+          . $SETUPSCRIPT
+          
 
     #   - name: Create docker container
     #     run: |
