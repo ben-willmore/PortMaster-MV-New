@@ -19,9 +19,12 @@ jobs:
           PORTDIR=$ROOTDIR/ports/soh/soh
           SRCDIR=$PORTDIR/src
           SETUPSCRIPT=$SRCDIR/docker-setup.txt
+          DOCKERFILE=$SRCDIR/Dockerfile
           BUILDSCRIPT=$SRCDIR/build.txt
   
           mkdir build-soh
+          cd build-soh
+          cp $DOCKERFILE .
           . $SETUPSCRIPT
           
 
