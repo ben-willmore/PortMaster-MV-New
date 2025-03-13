@@ -82,7 +82,7 @@ git submodule update --init
 mkdir build-starship && cd build-starship
 CC=clang-18 CXX=clang++-18 cmake .. -GNinja -DUSE_OPENGLES=1 \
  -DBUILD_CROWD_CONTROL=0 -DCMAKE_BUILD_TYPE=Release \
- -DCMAKE_LD_FLAGS=-ldl
+ -DCMAKE_CXX_FLAGS=-ldl
 
 cmake --build . --config Release --target GeneratePortOTR
 cmake --build .
