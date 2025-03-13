@@ -60,6 +60,6 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-latest"
           prerelease: true
-          title: "${{ env.SHORT_NAME }}-Portmaster-${{ steps.date.outputs.date }}"
+          title: "${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}"
           files: |
             ports/${{ env.PORT_DIR }}/*.zip
