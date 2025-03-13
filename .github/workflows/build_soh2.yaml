@@ -24,6 +24,7 @@ jobs:
         run: |
           git config --global user.email "ben@willmore.eu"
           git config --global user.name "Github Action"
+          git pull origin
           git add ports/soh2
           git commit -m "SoH2 release build ${{ steps.date.outputs.date }}"
           git tag SoH2-release-${{ steps.date.outputs.date }}
