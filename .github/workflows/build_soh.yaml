@@ -16,15 +16,17 @@ jobs:
           sparse-checkout-cone-mode: false
       - name: Build port
         run: |
-          pwd
+          SAVEROOT=`pwd`
           # . ./tools/build_port.txt ports/soh/soh
+          pwd
+          cd $SAVEROOT
       - name: Publish packaged artifacts
         uses: actions/upload-artifact@v4
         with:
           name: SoH-Portmaster
           path: |
-            "~/ports/soh/*.sh"
-            "~/ports/soh/soh"
+            "./ports/soh/*.sh"
+            "./ports/soh/soh"
           retention-days: 7
           overwrite: true
           include-hidden-files: true
