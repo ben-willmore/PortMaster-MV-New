@@ -1,6 +1,6 @@
 :config:
   segments:
-    - [0x3, 0x8BFC00]
+    - [0x3, 0x8BB210]
   header:
     code:
       - '#include "assets/ast_arwing.h"'

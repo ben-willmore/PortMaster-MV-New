@@ -1,6 +1,6 @@
 :config:
   segments:
-    - [0x6, 0xAB4000]
+    - [0x6, 0xAAF610]
   header:
     code:
       - '#include "assets/ast_venom_1.h"'
@@ -119,64 +119,64 @@ D_VE1_6007E74:
   { type: SF64:OBJECT_INIT, offset: 0x6007E74, symbol: D_VE1_6007E74 }
 
 aVe1EventScript:
-  { type: SF64:SCRIPT, offset: 0x601B1E4, symbol: aVe1EventScript }
+  { type: SF64:SCRIPT, offset: 0x601B1D8, symbol: aVe1EventScript }
 
 D_VE1_6010088:
   { type: SF64:OBJECT_INIT, offset: 0x6010088, symbol: D_VE1_6010088 }
 
 aVe1Pillar5Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B43C, symbol: aVe1Pillar5Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B430, symbol: aVe1Pillar5Hitbox }
 
 D_VE1_601B474:
-  { type: SF64:HITBOX, offset: 0x601B474, symbol: D_VE1_601B474 }
+  { type: SF64:HITBOX, offset: 0x601B468, symbol: D_VE1_601B474 }
 
 D_VE1_601B4C4:
-  { type: SF64:HITBOX, offset: 0x601B4C4, symbol: D_VE1_601B4C4 }
+  { type: SF64:HITBOX, offset: 0x601B4B8, symbol: D_VE1_601B4C4 }
 
 Ve1Wall1Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B4E0, symbol: Ve1Wall1Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B4D4, symbol: Ve1Wall1Hitbox }
 
 aVe1Wall2Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B4FC, symbol: aVe1Wall2Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B4F0, symbol: aVe1Wall2Hitbox }
 
 aVe1SceneryWall3Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B518, symbol: aVe1SceneryWall3Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B50C, symbol: aVe1SceneryWall3Hitbox }
 
 aVe1HallwayObstacleHitbox:
-  { type: SF64:HITBOX, offset: 0x601B584, symbol: aVe1HallwayObstacleHitbox }
+  { type: SF64:HITBOX, offset: 0x601B578, symbol: aVe1HallwayObstacleHitbox }
 
 aVe1GeneratorHitbox:
-  { type: SF64:HITBOX, offset: 0x601B5F4, symbol: aVe1GeneratorHitbox }
+  { type: SF64:HITBOX, offset: 0x601B5E8, symbol: aVe1GeneratorHitbox }
 
 aVe1WatchPostHitbox:
-  { type: SF64:HITBOX, offset: 0x601B644, symbol: aVe1WatchPostHitbox }
+  { type: SF64:HITBOX, offset: 0x601B638, symbol: aVe1WatchPostHitbox }
 
 aVe1TempleEntranceHitbox:
-  { type: SF64:HITBOX, offset: 0x601B678, symbol: aVe1TempleEntranceHitbox }
+  { type: SF64:HITBOX, offset: 0x601B66C, symbol: aVe1TempleEntranceHitbox }
 
 aVe1TempleInterior1Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B6C4, symbol: aVe1TempleInterior1Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B6B8, symbol: aVe1TempleInterior1Hitbox }
 
 aVe1TempleInterior2Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B710, symbol: aVe1TempleInterior2Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B704, symbol: aVe1TempleInterior2Hitbox }
 
 aVe1TempleInterior3Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B75C, symbol: aVe1TempleInterior3Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B750, symbol: aVe1TempleInterior3Hitbox }
 
 aVe1Pillar1Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B7F8, symbol: aVe1Pillar1Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B7EC, symbol: aVe1Pillar1Hitbox }
 
 aVe1Pillar2Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B830, symbol: aVe1Pillar2Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B824, symbol: aVe1Pillar2Hitbox }
 
 aVe1Pillar3Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B868, symbol: aVe1Pillar3Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B85C, symbol: aVe1Pillar3Hitbox }
 
 aVe1Pillar4Hitbox:
-  { type: SF64:HITBOX, offset: 0x601B8A0, symbol: aVe1Pillar4Hitbox }
+  { type: SF64:HITBOX, offset: 0x601B894, symbol: aVe1Pillar4Hitbox }
 
 aVe1MonkeyStatueHitbox:
-  { type: SF64:HITBOX, offset: 0x601B8D8, symbol: aVe1MonkeyStatueHitbox }
+  { type: SF64:HITBOX, offset: 0x601B8CC, symbol: aVe1MonkeyStatueHitbox }
 
 aVe1EnemyGateHitbox:
-  { type: SF64:HITBOX, offset: 0x601B944, symbol: aVe1EnemyGateHitbox }
+  { type: SF64:HITBOX, offset: 0x601B938, symbol: aVe1EnemyGateHitbox }
