@@ -12,5 +12,8 @@ cp \
 
 cp $SRCDIR/starship/build-starship/config.yml $DESTDIR/tools/
 
+rm -r $DESTDIR/tools/assets
+cp -r $SRCDIR/starship/build-starship/assets $DESTDIR/tools/
+
 rm -r $DESTDIR/libs
 cp -r $SRCDIR/starship/build-starship/libs $DESTDIR/
