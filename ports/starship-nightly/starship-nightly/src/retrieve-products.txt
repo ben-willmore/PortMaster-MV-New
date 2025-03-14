@@ -6,5 +6,11 @@ DESTDIR=$2
 cp $SRCDIR/starship/build-starship/Starship $DESTDIR/
 cp $SRCDIR/starship/build-starship/starship.o2r $DESTDIR/
 
+cp \
+ $SRCDIR/starship/build-starship/TorchExternal/src/TorchExternal-build/torch \
+ $DESTDIR/tools/
+
+cp $SRCDIR/starship/build-starship/config.yml $DESTDIR/tools/
+
 rm -r $DESTDIR/libs
 cp -r $SRCDIR/starship/build-starship/libs $DESTDIR/

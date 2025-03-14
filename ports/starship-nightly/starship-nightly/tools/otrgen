@@ -19,9 +19,9 @@ process_rom() {
 
     # Run the extraction
     echo "Extracting data from $input_file..."
-    if ./torch otr "../$input_file" >/dev/null 2>&1; then
-        echo "Extraction complete. OTR generated."
-        mv sf64.otr ../sf64.otr
+    if ./torch o2r "../$input_file" >/dev/null 2>&1; then
+        echo "Extraction complete. O2R generated."
+        mv sf64.o2r ../sf64.o2r
         rm -rf ../*.*64
     else
         echo "Error: Extraction failed for $input_file."
