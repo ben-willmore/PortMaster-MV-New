@@ -27,7 +27,7 @@ jobs:
 
       - name: Build port
         run: |
-          ./tools/build_port.txt ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
+          ./tools/build_port.sh ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
 
       - name: Create zip file
         run: |
