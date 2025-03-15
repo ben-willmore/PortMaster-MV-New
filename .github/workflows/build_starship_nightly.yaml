@@ -1,9 +1,8 @@
 name: Build Starship nightly
 on:
-  # Build on request
-  workflow_dispatch
-#  schedule:
-#    - cron:  '5 4 * * *'
+  workflow_dispatch:
+  schedule:
+    - cron:  '5 4 * * *'
 
 env:
   PORT_NAME: "Starship"
