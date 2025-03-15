@@ -54,9 +54,9 @@ cd 2ship2harkinian
 # Clone the submodules
 git submodule update --init
 
-# Patch for old git
+# Patch required for 65ca86e10bd6ff0b28f93772131c01cadd5e138c
 cd libultraship
-patch -p1 < ../../soh2.patch
+patch -p1 < ../../soh2.nightly.patch
 cd ..
 
 mkdir build-soh && cd build-soh
