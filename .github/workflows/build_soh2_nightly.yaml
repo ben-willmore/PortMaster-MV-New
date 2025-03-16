@@ -4,60 +4,12 @@ on:
   schedule:
     - cron:  '5 4 * * *'
 
-env:
-  PORT_NAME: "Ship of Harkinian 2"
-  SHORT_NAME: "SoH2"
-  PORT_DIR: soh2-nightly
-  BUILD_TYPE: nightly
-  EMAIL: ben@willmore.eu
-
 jobs:
   build:
-    runs-on: ubuntu-24.04-arm
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            releases
-            tools
-            SOURCE_SETUP.txt
-            ports/${{ env.PORT_DIR }}
-          sparse-checkout-cone-mode: false
-
-      - name: Build port
-        run: |
-          ./tools/build_port.sh ports/${{ env.PORT_DIR }}/${{ env.PORT_DIR }}
-
-      - name: Create zip file
-        run: |
-          cd ports/${{ env.PORT_DIR }}
-          rm -rf ${{ env.PORT_DIR }}/*.part.[0-9]*
-          zip -r ${{ env.PORT_DIR }}.zip *.sh ${{ env.PORT_DIR }}
-          # Don't add this to repo
-          echo ${{ env.PORT_DIR }}.zip >> .gitignore
-          echo ".gitignore" >> .gitignore
-
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-
-      - name: Create git tag and upload
-        run: |
-          mkdir runtimes # dummy directory, expected by prepare_repo.sh
-          ./tools/prepare_repo.sh
-          git config --global user.email "${{ env.EMAIL }}"
-          git config --global user.name "Github Action"
-          git pull origin
-          git add ports/${{ env.PORT_DIR }}
-          git commit -m "${{ env.SHORT_NAME }} ${{ env.BUILD_TYPE }} build ${{ steps.date.outputs.date }}"
-          git push origin
-
-      - name: Create release
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-latest"
-          prerelease: true
-          title: "${{ env.SHORT_NAME }}-${{ env.BUILD_TYPE }}-${{ steps.date.outputs.date }}"
-          files: |
-            ports/${{ env.PORT_DIR }}/*.zip
+    uses: ./.github/workflows/build_port.yaml
+    with:
+      port-name: "Ship of Harkinian 2"
+      short-name: SoH2
+      port-dir: soh2-nightly
+      build-type: nightly
+      email: ben@willmore.eu

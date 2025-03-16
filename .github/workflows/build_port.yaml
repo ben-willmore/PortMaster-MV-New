@@ -1,0 +1,76 @@
+name: Build port
+
+on:
+  workflow_call:
+    inputs:
+      port-name:
+        description: "Port name"
+        required: true
+        type: string
+      short-name:
+        description: "Short name"
+        required: true
+        type: string
+      port-dir:
+        description: "Portfolder"
+        required: true
+        type: string
+      build-type:
+        description: "Build type"
+        required: true
+        type: string
+      email:
+        description: "Email"
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            releases
+            tools
+            SOURCE_SETUP.txt
+            ports/${{ inputs.port-dir }}
+          sparse-checkout-cone-mode: false
+
+      - name: Build port
+        run: |
+          ./tools/build_port.sh ports/${{ inputs.port-dir }}/${{ inputs.port-dir }}
+
+      - name: Create zip file
+        run: |
+          cd ports/${{ inputs.port-dir }}
+          rm -rf ${{ inputs.port-dir }}/*.part.[0-9]*
+          zip -r ${{ inputs.port-dir }}.zip *.sh ${{ inputs.port-dir }}
+          # Don't add this to repo
+          echo ${{ inputs.port-dir }}.zip >> .gitignore
+          echo ".gitignore" >> .gitignore
+
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+      - name: Create git tag and upload
+        run: |
+          mkdir runtimes # dummy directory, expected by prepare_repo.sh
+          ./tools/prepare_repo.sh
+          git config --global user.email "${{ inputs.email }}"
+          git config --global user.name "Github Action"
+          git pull origin
+          git add ports/${{ inputs.port-dir }}
+          git commit -m "${{ inputs.short-name }} ${{ inputs.build-type }} build ${{ steps.date.outputs.date }}"
+          git push origin
+
+      - name: Create release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ inputs.short-name }}-${{ inputs.build-type }}-latest"
+          prerelease: true
+          title: "${{ inputs.short-name }}-${{ inputs.build-type }}-${{ steps.date.outputs.date }}"
+          files: |
+            ports/${{ inputs.port-dir }}/*.zip
