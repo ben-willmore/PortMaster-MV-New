@@ -2,7 +2,7 @@ name: Build Ship of Harkinian 2 nightly
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '5 4 * * *'
+    - cron:  '25 4 * * *'
 
 jobs:
   build:
