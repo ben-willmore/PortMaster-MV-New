@@ -22,7 +22,8 @@ process_rom() {
     if ./torch otr "../$input_file" >/dev/null 2>&1; then
         echo "Extraction complete. OTR generated."
         mv sf64.otr ../sf64.otr
-        rm -rf ../*.*64
+        # Don't delete ROM on nightly builds -- may be needed often
+        # rm -rf ../*.*64
     else
         echo "Error: Extraction failed for $input_file."
         exit 1

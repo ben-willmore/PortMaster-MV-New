@@ -19,6 +19,7 @@ cd ../..
 
 git clone https://github.com/nih-at/libzip.git
 cd libzip
+git checkout 0581df510597b46c28509e9d4b5998cf5fecb636
 mkdir build-starship && cd build-starship
 cmake ..
 make -j8
@@ -27,6 +28,7 @@ cd ../..
 
 git clone https://github.com/nlohmann/json.git
 cd json
+git checkout f3dc4684b40a124cabc8554967c2cd8db54f15dd
 mkdir build-starship && cd build-starship
 cmake ..
 make -j8
@@ -35,6 +37,7 @@ cd ../..
 
 # git clone https://github.com/libarchive/bzip2.git
 # cd bzip2
+# git checkout 1ea1ac188ad4b9cb662e3f8314673c63df95a589
 # mkdir build-starship && cd build-starship
 # cmake ..
 # make -j8
@@ -43,6 +46,7 @@ cd ../..
 
 git clone https://github.com/leethomason/tinyxml2.git
 cd tinyxml2
+git checkout 57ec94127bda7979282315b7d4b0059eeb6f3b5d
 git checkout .
 mkdir build-starship && cd build-starship
 cmake -DBUILD_SHARED_LIBS=ON ..
@@ -56,6 +60,7 @@ cd ..
 
 git clone https://github.com/microsoft/GSL.git
 cd GSL
+git checkout 2828399820ef4928cc89b65605dca5dc68efca6e
 mkdir build-starship && cd build-starship
 cmake -DBUILD_SHARED_LIBS=ON ..
 make -j8
@@ -64,6 +69,7 @@ cd ../..
 
 git clone https://github.com/gabime/spdlog.git
 cd spdlog
+git checkout 3335c380a08c5e0f5117a66622df6afdb3d74959
 mkdir build-starship && cd build-starship
 cmake ..
 make -j8

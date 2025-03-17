@@ -67,5 +67,6 @@ done
 # Cleanup
 echo "Finished processing all ROM files."
 rm -rf ./placeholder
-rm -rf *.*64
+# Don't delete ROM file for nightly builds -- may be needed often
+# rm -rf *.*64
 echo "Patching process complete!"
