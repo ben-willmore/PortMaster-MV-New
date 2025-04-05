@@ -39,7 +39,8 @@ jobs:
 
       - name: Build port
         run: |
-          ./tools/build_port.sh ports/${{ inputs.port-dir }}/${{ inputs.port-dir }}
+          echo foobar > ports/${{ inputs.port-dir }}/${{ inputs.port-dir }}/blargh
+          #./tools/build_port.sh ports/${{ inputs.port-dir }}/${{ inputs.port-dir }}
 
       - name: Create zip file
         run: |
@@ -68,7 +69,6 @@ jobs:
 
       - name: Create release
         uses: "ncipollo/release-action@v1.16.0"
-        if: steps.buildcheck.outputs.BUILD == 'true'
         with:
           tag: "${{ inputs.short-name }}-${{ inputs.build-type }}-latest"
           artifacts: ports/${{ inputs.port-dir }}/*.zip
