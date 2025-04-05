@@ -1,0 +1,22 @@
+#!/bin/bash
+
+SRCDIR=$1
+DESTDIR=$2
+
+cd $DESTDIR
+
+cp $SRCDIR/Shipwright/build-soh/soh/soh.elf .
+cp $SRCDIR/Shipwright/build-soh/soh/soh.otr .
+
+rm -r ./libs
+cp -r $SRCDIR/Shipwright/build-soh/libs .
+
+cp $SRCDIR/Shipwright/build-soh/ZAPD/ZAPD.out ./assets/ZAPD.out
+
+cd ./assets
+rm -rf ./extractor
+cp -r $SRCDIR/Shipwright/build-soh/soh/assets/extractor .
+tar cfz extractor.tar.gz ./extractor
+rm -rf ./extractor
+
+echo You will also need to update otrgen by hand
