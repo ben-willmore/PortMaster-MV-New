@@ -2,7 +2,7 @@
 
 # Function to handle a single ROM file
 process_rom() {
-    local romfile=$1
+    local romfile="$1"
 
     # Compute SHA-1 hash of the file
     ROMHASH=$(sha1sum -b "$romfile" 2>> log.txt | awk '{ print $1 }') || { echo "Error: Failed to compute SHA-1 hash" >> log.txt; return 1; }
@@ -80,15 +80,20 @@ process_rom() {
         ;;
     esac
 
-    if [ ! -e "$GAMEDIR/$OTRNAME" ]; then
-        echo "Generating $OTRNAME from $romfile..."
-        ./assets/ZAPD.out ed -eh -i ./assets/extractor/xmls/$ROM -b ./$romfile -fl ./assets/extractor/filelists -o placeholder -osf placeholder -gsf 1 -rconf ./assets/extractor/Config_$ROM.xml -se OTR --otrfile "$OTRNAME" --portVer "9.0.0"
-        if [ $? -eq 0 ]; then
-            echo "Successfully generated $OTRNAME"
-        else
-            echo "Error: Failed to generate $OTRNAME"
-            return 1
-        fi
+    if [ -e "$GAMEDIR/$OTRNAME" ]; then
+        # regenerate otr to avoid users being stuck on old incompatible
+        # old version
+        echo "$OTRNAME is already present, regenerating it from $romfile..."
+        rm "$GAMEDIR/$OTRNAME"
+    fi
+    echo "Generating $OTRNAME from $romfile..."
+    ./assets/ZAPD.out ed -eh -i ./assets/extractor/xmls/$ROM -b "$romfile" -fl ./assets/extractor/filelists -o placeholder -osf placeholder -gsf 1 -rconf ./assets/extractor/Config_$ROM.xml -se OTR --otrfile "$OTRNAME" --portVer "9.0.0"
+    if [ $? -eq 0 ]; then
+        echo "Successfully generated $OTRNAME"
+        return 0
+    else
+        echo "Error: Failed to generate $OTRNAME"
+        return 1
     fi
 }
 
@@ -104,31 +109,28 @@ echo "GAMEDIR is set to: $GAMEDIR"
 export LD_LIBRARY_PATH="$GAMEDIR/libs:$LD_LIBRARY_PATH"
 
 # Extract extractor directory
-cd assets
-rm -r extractor
-tar xfz extractor.tar.gz
+if [ -f assets/extractor.tar.gz ]; then
+  echo Extracting xml files...
+  cd assets
+  rm -rf extractor
+  gunzip extractor.tar.gz
+  tar xf extractor.tar
+  rm extractor.tar
+  cd ..
+fi
 
 # Count the number of ROM files
-rom_count=0
-for romfile in *.*64; do
-    if [ -f "$romfile" ]; then
-        rom_count=$((rom_count + 1))
-    fi
-done
-
-sleep 1
+rom_count=`find $GAMEDIR -maxdepth 1 -name "*.*64" | wc -l`
 echo "Found $rom_count ROM files!"
 
 # Process them all
-counter=1
-for romfile in *.*64; do
-    if [ -f "$romfile" ]; then
-        echo "Processing ${romfile}..."
-        mv "$romfile" "rom${counter}.z64" || true
-        if [ $? -eq 0 ]; then
-            process_rom "rom${counter}.z64"
-        counter=$((counter + 1))
-        fi
+rm -rf .success
+find $GAMEDIR -maxdepth 1 -name "*.*64" | while read romfile
+do
+    echo "Processing ${romfile}..."
+    process_rom "${romfile}"
+    if [ $? == 0 ]; then
+        echo "$romfile" >> .success
     fi
 done
 
@@ -136,5 +138,10 @@ done
 echo "Finished processing all ROM files."
 rm -rf ./placeholder
 
- rm -rf *.*64
-echo "Patching process complete!"
+success_count=`wc -l .success |cut -d" " -f1`
+if [[ "${success_count}" == "${rom_count}" ]]; then
+    rm -r *.*64
+    echo "Patching process complete!"
+else
+    echo "Error during patching!"
+fi
