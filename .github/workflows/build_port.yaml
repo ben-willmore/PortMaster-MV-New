@@ -39,8 +39,7 @@ jobs:
 
       - name: Build port
         run: |
-          echo foobar > ports/${{ inputs.port-dir }}/${{ inputs.port-dir }}/blargh
-          #./tools/build_port.sh ports/${{ inputs.port-dir }}/${{ inputs.port-dir }}
+          ./tools/build_port.sh ports/${{ inputs.port-dir }}/${{ inputs.port-dir }}
 
       - name: Create zip file
         run: |
