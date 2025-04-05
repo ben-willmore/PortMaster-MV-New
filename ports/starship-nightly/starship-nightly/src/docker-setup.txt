@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# run with ./docker-setup.txt <dockername>
+# where <dockername> is whatever you want the image and container to be called
+
+NAME=$1
+ARCH=aarch64
+RELEASE=focal
+
+docker pull --platform linux/${ARCH} ubuntu:${RELEASE}
+docker build --platform linux/${ARCH} -t ${NAME} .
+
+if tty -s; then
+  # For interactive use, start a container and open a shell
+  echo INTERACTIVE
+  docker run -it -v `realpath ..`:/root --name=${NAME} --hostname=${NAME} \
+    ${NAME}
+
+else
+  # Non-interactive, e.g. Github Action
+  echo NONINTERACTIVE
+  docker run -v `realpath ..`:/root --name=${NAME}  --hostname=${NAME} \
+    ${NAME} /bin/bash -c "sleep infinity" &
+fi

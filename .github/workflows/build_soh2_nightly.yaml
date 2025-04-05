@@ -1,0 +1,15 @@
+name: Build Ship of Harkinian 2 nightly
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '25 4 * * *'
+
+jobs:
+  build:
+    uses: ./.github/workflows/build_port.yaml
+    with:
+      port-name: "Ship of Harkinian 2"
+      short-name: SoH2
+      port-dir: soh2-nightly
+      build-type: nightly
+      email: ben@willmore.eu

@@ -1,0 +1,16 @@
+name: Build Starship nightly
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '45 4 * * *'
+
+jobs:
+  build:
+    uses: ./.github/workflows/build_port.yaml
+    with:
+      port-name: "Starship"
+      short-name: Starship
+      port-dir: starship-nightly
+      build-type: nightly
+      email: ben@willmore.eu
