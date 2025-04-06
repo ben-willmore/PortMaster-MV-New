@@ -47,9 +47,8 @@ process_rom() {
     d327752c46edc70ff3668b9514083dbbee08927c) ROMHASH=50bebedad9e0f10746a52b07239e47fa6c284d03 ;;
     ecdeb1747560834e079c22243febea7f6f26ba3b) ROMHASH=079b855b943d6ad8bd1eb026c0ed169ecbdac7da ;;
     f19f8662ec7abee29484a272a6fda53e39efe0f1) ROMHASH=079b855b943d6ad8bd1eb026c0ed169ecbdac7da ;;
-    # was in previous version of otrgen but is not in supported hash list:
-    # 25e8ae79ea0839ca5c984473f7460d8040c36f9c) ROMHASH=517bd9714c73cb96c21e7c2ef640d7b55186102f ;;
-    # 166c02770d67fcc3954c443eb400a6a3573d3fc0) ROMHASH=517bd9714c73cb96c21e7c2ef640d7b55186102f ;;
+    25e8ae79ea0839ca5c984473f7460d8040c36f9c) ROMHASH=517bd9714c73cb96c21e7c2ef640d7b55186102f ;;
+    166c02770d67fcc3954c443eb400a6a3573d3fc0) ROMHASH=517bd9714c73cb96c21e7c2ef640d7b55186102f ;;
     esac
 
     case "$ROMHASH" in
@@ -72,8 +71,7 @@ process_rom() {
     ad69c91157f6705e8ab06c79fe08aad47bb57ba7) ROM=N64_NTSC_10; OTRNAME="oot.otr" ;;
     50bebedad9e0f10746a52b07239e47fa6c284d03) ROM=GC_MQ_D; OTRNAME="oot-mq.otr" ;;
     079b855b943d6ad8bd1eb026c0ed169ecbdac7da) ROM=GC_MQ_D; OTRNAME="oot-mq.otr" ;;
-    # was in previous version of otrgen but is not in supported hash list:
-    # 517bd9714c73cb96c21e7c2ef640d7b55186102f) ROM=GC_MQ_D; OTRNAME="oot-mq.otr" ;;
+    517bd9714c73cb96c21e7c2ef640d7b55186102f) ROM=GC_MQ_D; OTRNAME="oot-mq.otr" ;;
     *)
         echo "$ROMHASH rom hash does not match" | tee -a log.txt
         return 1
