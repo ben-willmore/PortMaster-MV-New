@@ -1,3 +1,5 @@
+SOH_GIT_TAG_OR_COMMIT="9.0.2"
+
 git clone https://github.com/libsdl-org/SDL.git
 cd SDL
 git checkout release-2.32.0
@@ -52,11 +54,7 @@ cd ..
 git clone https://github.com/HarbourMasters/Shipwright.git
 cd Shipwright
 
-# build the develop branch 
-# git checkout develop
-
-# Blair Alfa
-git checkout 9.0.0
+git checkout $SOH_GIT_TAG_OR_COMMIT
 
 git submodule update --init
 mkdir build-soh && cd build-soh
